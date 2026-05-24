@@ -154,7 +154,7 @@ export async function listConfig(options: { global?: boolean; project?: boolean;
   return { global: globalConfig, project: projectConfig };
 }
 
-export async function resetConfig(key?: string, options: { global?: boolean; project?: boolean; yes?: boolean; lang: LanguagePack }): Promise<boolean> {
+export async function resetConfig(key: string|undefined, options: { global?: boolean; project?: boolean; yes?: boolean; lang: LanguagePack }): Promise<boolean> {
   const targetGlobal = options.global !== false && !options.project;
   const targetProject = options.project || !options.global;
 
