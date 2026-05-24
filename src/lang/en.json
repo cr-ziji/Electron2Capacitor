@@ -1,0 +1,86 @@
+{
+  "init": {
+    "title": "E2C Project Initialization",
+    "description": "Initialize a new E2C configuration for converting your Electron project to Capacitor.",
+    "prompts": {
+      "projectPath": "Enter the Electron project path",
+      "outputPath": "Enter the output directory path",
+      "projectName": "Enter the project name",
+      "appId": "Enter the application ID",
+      "engine": "Select the Node.js engine"
+    },
+    "success": "Project initialized successfully!",
+    "configCreated": "Configuration file created at"
+  },
+  "check": {
+    "title": "E2C Compatibility Check",
+    "description": "Checking compatibility of Electron project with Capacitor.",
+    "checking": "Analyzing project...",
+    "compatible": "Compatible APIs found:",
+    "incompatible": "Incompatible APIs found:",
+    "warning": "Warnings:",
+    "score": "Viability Score",
+    "result": "Conversion Result",
+    "viable": "Project is viable for conversion!",
+    "notViable": "Project may have issues with conversion."
+  },
+  "convert": {
+    "title": "E2C Project Conversion",
+    "description": "Converting Electron project to Capacitor.",
+    "converting": "Starting conversion process...",
+    "stage": "Executing stage",
+    "complete": "Conversion completed successfully!",
+    "outputDir": "Output directory",
+    "filesProcessed": "Files processed"
+  },
+  "config": {
+    "title": "E2C Configuration Management",
+    "get": {
+      "description": "Get a configuration value",
+      "notFound": "Configuration key not found"
+    },
+    "set": {
+      "description": "Set a configuration value",
+      "success": "Configuration value set successfully"
+    },
+    "list": {
+      "description": "List all configuration values",
+      "empty": "No configuration found",
+      "globalHeader": "Global Configuration",
+      "projectHeader": "Project Configuration",
+      "mergedHeader": "Merged Configuration"
+    },
+    "reset": {
+      "description": "Reset configuration to defaults",
+      "success": "Configuration reset successfully",
+      "confirm": "Are you sure you want to reset the configuration?"
+    },
+    "delete": {
+      "description": "Delete a configuration key",
+      "success": "Configuration key deleted successfully",
+      "confirm": "Are you sure you want to delete this key?"
+    }
+  },
+  "errors": {
+    "general": "An error occurred",
+    "configNotFound": "Configuration file not found",
+    "configInvalid": "Invalid configuration file format",
+    "projectNotFound": "Project directory not found",
+    "pathNotFound": "Path does not exist",
+    "permissionDenied": "Permission denied",
+    "transformFailed": "Code transformation failed",
+    "copyFailed": "File copy failed",
+    "pluginLoadFailed": "Failed to load plugin",
+    "invalidKey": "Invalid configuration key"
+  },
+  "common": {
+    "error": "Error",
+    "warn": "Warning",
+    "info": "Info",
+    "success": "Success",
+    "processing": "Processing...",
+    "done": "Done",
+    "loading": "Loading...",
+    "confirming": "Confirming..."
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "init": {
+    "title": "E2C 项目初始化",
+    "description": "初始化一个新的 E2C 配置，用于将您的 Electron 项目转换为 Capacitor。",
+    "prompts": {
+      "projectPath": "输入 Electron 项目路径",
+      "outputPath": "输入输出目录路径",
+      "projectName": "输入项目名称",
+      "appId": "输入应用 ID",
+      "engine": "选择 Node.js 引擎"
+    },
+    "success": "项目初始化成功！",
+    "configCreated": "配置文件创建于"
+  },
+  "check": {
+    "title": "E2C 兼容性检查",
+    "description": "检查 Electron 项目与 Capacitor 的兼容性。",
+    "checking": "正在分析项目...",
+    "compatible": "找到兼容的 API：",
+    "incompatible": "找到不兼容的 API：",
+    "warning": "警告：",
+    "score": "可行性分数",
+    "result": "转换结果",
+    "viable": "项目适合转换！",
+    "notViable": "项目转换可能存在问题。"
+  },
+  "convert": {
+    "title": "E2C 项目转换",
+    "description": "正在将 Electron 项目转换为 Capacitor。",
+    "converting": "开始转换过程...",
+    "stage": "执行阶段",
+    "complete": "转换完成！",
+    "outputDir": "输出目录",
+    "filesProcessed": "已处理文件"
+  },
+  "config": {
+    "title": "E2C 配置管理",
+    "get": {
+      "description": "获取配置值",
+      "notFound": "未找到配置键"
+    },
+    "set": {
+      "description": "设置配置值",
+      "success": "配置值设置成功"
+    },
+    "list": {
+      "description": "列出所有配置值",
+      "empty": "未找到配置",
+      "globalHeader": "全局配置",
+      "projectHeader": "项目配置",
+      "mergedHeader": "合并配置"
+    },
+    "reset": {
+      "description": "重置配置为默认值",
+      "success": "配置重置成功",
+      "confirm": "确定要重置配置吗？"
+    },
+    "delete": {
+      "description": "删除配置键",
+      "success": "配置键删除成功",
+      "confirm": "确定要删除此键吗？"
+    }
+  },
+  "errors": {
+    "general": "发生错误",
+    "configNotFound": "配置文件未找到",
+    "configInvalid": "配置文件格式无效",
+    "projectNotFound": "项目目录未找到",
+    "pathNotFound": "路径不存在",
+    "permissionDenied": "权限不足",
+    "transformFailed": "代码转换失败",
+    "copyFailed": "文件复制失败",
+    "pluginLoadFailed": "插件加载失败",
+    "invalidKey": "无效的配置键"
+  },
+  "common": {
+    "error": "错误",
+    "warn": "警告",
+    "info": "信息",
+    "success": "成功",
+    "processing": "处理中...",
+    "done": "完成",
+    "loading": "加载中...",
+    "confirming": "确认中..."
+  }
+}
