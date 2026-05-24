@@ -263,18 +263,18 @@ e2c config delete <key> [options]
 
 ```
 e2c/
-├── bin/
-│   └── cli.js                    # CLI 入口文件
 ├── assets/                       # 静态资源-模拟桌面环境
 │   ├── index.html
 │   ├── src/
-│   │   ├── main.js
+│   │   ├── main.ts
 │   │   └── style.css
 │   └── public/
 │       └── nodejs
-│           ├── loader.js
-│           └── main.js
+│           ├── loader.ts
+│           └── main.ts
 ├── src/
+│   ├── bin/
+│   │   └── cli.ts                # CLI 入口文件
 │   ├── core/                     # 转换引擎
 │   │   ├── stages/               # 转换阶段
 │   │   │   ├── file-copy.ts
@@ -292,17 +292,19 @@ e2c/
 │   ├── lang/                      # 语言包
 │   │   ├── en.json
 │   │   └── zh.json
-│   ├── main.ts
+│   ├── utils/                     # 工具函数
+│   │   ├── logger.ts
+│   │   ├── ast-parser.ts
+│   │   └── file-utils.ts
+│   ├── index.ts
 │   └── types.ts
-├── utils/                        # 工具函数
-│   ├── logger.ts
-│   ├── ast-parser.ts
-│   └── file-utils.ts
 ├── plugins/                      # 默认插件
 │   ├── capacitorNodejs.ts
 │   ├── nodejsMobileCapacitor.ts
 │   ├── electron.ts
 │   └── contentAST.ts
+├── scripts/                      # 脚本文件
+│   └── build-assets.ts           # 构建 assets 的脚本
 ├── test/                         # 测试capacitor应用
 ├── dist/                         # ts构建目录
 ├── examples/                     # 示例项目

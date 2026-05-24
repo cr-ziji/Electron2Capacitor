@@ -1,0 +1,52 @@
+{
+  "name": "electron2capacitor",
+  "version": "1.0.0",
+  "description": "e2c (Electron to Capacitor) 是一个用于快速将 Electron 项目转换为 Capacitor 移动端项目的命令行工具。",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cr-ziji/Electron2Capacitor.git"
+  },
+  "scripts": {
+    "build": "tsc && npm run build:assets",
+    "build:assets": "tsx scripts/build-assets.ts",
+    "dev": "tsc --watch",
+    "start": "node dist/src/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "electron",
+    "capacitor",
+    "mobile",
+    "convert",
+    "cli"
+  ],
+  "main": "dist/src/index.js",
+  "bin": {
+    "e2c": "dist/src/bin/cli.js"
+  },
+  "author": "cyp,cyril",
+  "license": "MIT",
+  "type": "commonjs",
+  "files": [
+    "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/cr-ziji/Electron2Capacitor/issues"
+  },
+  "homepage": "https://github.com/cr-ziji/Electron2Capacitor#readme",
+  "dependencies": {
+    "@inquirer/prompts": "^8.4.3",
+    "chalk": "^4.1.2",
+    "commander": "^14.0.3",
+    "fs-extra": "^11.3.5",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^25.9.1",
+    "esbuild": "^0.28.0",
+    "glob": "^13.0.6",
+    "tsx": "^4.22.3",
+    "typescript": "^6.0.3"
+  }
+}
