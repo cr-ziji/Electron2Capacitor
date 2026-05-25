@@ -4,6 +4,8 @@ import { copy, remove } from 'fs-extra';
 import { join } from 'path';
 
 async function buildAssets() {
+    await copy('src/lang', 'dist/src/lang');
+
     const srcDir = 'assets';
     const outDir = 'dist/assets';
 

@@ -1,4 +1,86 @@
 {
+  "cli": {
+    "description": "e2c (Electron to Capacitor) is a command line tool for quickly converting Electron projects to Capacitor mobile projects.",
+    "version": "Show version number",
+    "init": {
+      "description": "Create configuration file",
+      "error": "Initialization failed",
+      "options": {
+        "projectPath": "Electron project path",
+        "outputPath": "Output directory path",
+        "projectName": "Application name",
+        "appId": "Application ID",
+        "configType": "Configuration file type",
+        "engine": "Node.js engine",
+        "default": "Use default configuration"
+      }
+    },
+    "check": {
+      "description": "Conversion feasibility check",
+      "error": "Check failed",
+      "options": {
+        "config": "Configuration file path"
+      }
+    },
+    "convert": {
+      "description": "Convert project",
+      "error": "Conversion failed",
+      "options": {
+        "config": "Configuration file path",
+        "force": "Force overwrite output directory",
+        "verbose": "Verbose output mode"
+      }
+    },
+    "config": {
+      "description": "Configuration management",
+      "get": {
+        "description": "Get configuration value",
+        "error": "Failed to get configuration",
+        "options": {
+          "global": "Read global configuration only",
+          "project": "Read project configuration only",
+          "json": "Output as JSON format"
+        }
+      },
+      "set": {
+        "description": "Set configuration value",
+        "error": "Failed to set configuration",
+        "options": {
+          "global": "Set to global configuration (default)",
+          "project": "Set to project configuration",
+          "force": "Force overwrite without confirmation"
+        }
+      },
+      "list": {
+        "description": "List all configurations",
+        "error": "Failed to list configurations",
+        "options": {
+          "global": "Show global configuration only",
+          "project": "Show project configuration only",
+          "merged": "Show merged final configuration (default)",
+          "table": "Display as table (default)",
+          "json": "Display as JSON format"
+        }
+      },
+      "reset": {
+        "description": "Reset configuration to default",
+        "error": "Failed to reset configuration",
+        "options": {
+          "global": "Reset global configuration (default)",
+          "project": "Reset project configuration",
+          "yes": "Skip confirmation prompt"
+        }
+      },
+      "delete": {
+        "description": "Delete configuration item",
+        "error": "Failed to delete configuration",
+        "options": {
+          "global": "Delete from global configuration (default)",
+          "project": "Delete from project configuration"
+        }
+      }
+    }
+  },
   "init": {
     "title": "E2C Project Initialization",
     "description": "Initialize a new E2C configuration for converting your Electron project to Capacitor.",
@@ -71,7 +153,8 @@
     "transformFailed": "Code transformation failed",
     "copyFailed": "File copy failed",
     "pluginLoadFailed": "Failed to load plugin",
-    "invalidKey": "Invalid configuration key"
+    "invalidKey": "Invalid configuration key",
+    "unknownCommand": "Unknown command, please use -- help to view available commands"
   },
   "common": {
     "error": "Error",

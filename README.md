@@ -105,6 +105,7 @@ e2c init [options]
 - `-n, --name <name>` - 应用名
 - `-a, --appid <id>` - 应用id
 - `-t, --type <type>` - 配置文件类型
+- `-d, --default` - 使用默认配置
 
 #### 3.1.2 `e2c check`
 

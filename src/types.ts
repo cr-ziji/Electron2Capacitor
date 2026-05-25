@@ -137,6 +137,88 @@ export interface TranslationMap {
 }
 
 export interface LanguagePack {
+  cli: {
+    description: string;
+    version: string;
+    init: {
+      description: string;
+      error: string;
+      options: {
+        projectPath: string;
+        outputPath: string;
+        projectName: string;
+        appId: string;
+        configType: string;
+        engine: string;
+        default: string;
+      };
+    };
+    check: {
+      description: string;
+      error: string;
+      options: {
+        config: string;
+      };
+    };
+    convert: {
+      description: string;
+      error: string;
+      options: {
+        config: string;
+        force: string;
+        verbose: string;
+      };
+    };
+    config: {
+      description: string;
+      get: {
+        description: string;
+        error: string;
+        options: {
+          global: string;
+          project: string;
+          json: string;
+        };
+      };
+      set: {
+        description: string;
+        error: string;
+        options: {
+          global: string;
+          project: string;
+          force: string;
+        };
+      };
+      list: {
+        description: string;
+        error: string;
+        options: {
+          global: string;
+          project: string;
+          merged: string;
+          table: string;
+          json: string;
+        };
+      };
+      reset: {
+        description: string;
+        error: string;
+        options: {
+          global: string;
+          project: string;
+          yes: string;
+        };
+      };
+      delete: {
+        description: string;
+        error: string;
+        options: {
+          global: string;
+          project: string;
+        };
+      };
+    };
+  };
   init: {
     title: string;
     description: string;
@@ -210,6 +292,7 @@ export interface LanguagePack {
     copyFailed: string;
     pluginLoadFailed: string;
     invalidKey: string;
+    unknownCommand: string;
   };
   common: {
     error: string;

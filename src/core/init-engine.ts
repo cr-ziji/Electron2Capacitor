@@ -3,8 +3,9 @@ import { E2CConfig } from '../types';
 import { input, select } from '@inquirer/prompts';
 import { ensureDirectory, writeConfig } from '../utils/file-utils';
 import { createLogger, Logger } from '../utils/logger';
-import { LanguagePack } from '../types';
-import fs from 'fs-extra';
+import { loadLanguagePack, LanguagePack } from '../utils/lang-loader';
+
+const t: LanguagePack = loadLanguagePack('zh');
 
 export interface InitOptions {
   in?: string;
@@ -13,12 +14,10 @@ export interface InitOptions {
   appid?: string;
   type?: string;
   verbose?: boolean;
-  lang: LanguagePack;
 }
 
 export async function initializeProject(options: InitOptions): Promise<boolean> {
-  const logger = createLogger({ verbose: options.verbose || false });
-  const t = options.lang;
+  const logger: Logger = createLogger({ verbose: options.verbose || false });
 
   logger.info(t.init.title);
   logger.info(t.init.description);
