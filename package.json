@@ -24,6 +24,7 @@
   "bin": {
     "e2c": "dist/src/bin/cli.js"
   },
+  "types": "dist/src/types.d.ts",
   "author": "cyp,cyril",
   "license": "MIT",
   "type": "commonjs",

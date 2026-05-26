@@ -1,7 +1,8 @@
 import path from 'path';
+import fs from 'fs-extra';
 import { E2CConfig } from '../types';
 import { input, select } from '@inquirer/prompts';
-import { ensureDirectory, writeConfig } from '../utils/file-utils';
+import { writeProjectConfig, resolvePath } from '../utils/file-utils';
 import { createLogger, Logger } from '../utils/logger';
 import { loadLanguagePack, LanguagePack } from '../utils/lang-loader';
 
@@ -22,48 +23,55 @@ export async function initializeProject(options: InitOptions): Promise<boolean> 
   logger.info(t.init.title);
   logger.info(t.init.description);
 
-  const projectPath = options.in || await input({
+  const projectPath = await input({
     message: t.init.prompts.projectPath,
-    default: './electron-app',
+    default: options.in||'./',
+    prefill: options.in?'editable':'tab'
   });
+  const projectPathResolved = resolvePath(projectPath);
+  if (!await fs.pathExists(projectPathResolved)) {
+    logger.error(t.errors.projectNotFound);
+    return false;
+  }
+  const projectPackage = require(path.join(projectPathResolved, 'package.json'));
 
-  const outputPath = options.out || await input({
+  const outputPath = await input({
     message: t.init.prompts.outputPath,
-    default: './capacitor-app',
+    default: options.out||'./output',
+    prefill: options.out?'editable':'tab'
   });
 
-  const projectName = options.name || await input({
+  const projectName = await input({
     message: t.init.prompts.projectName,
-    default: 'my-mobile-app',
+    default: options.name||projectPackage.name||'my-mobile-app',
+    prefill: options.name?'editable':'tab'
   });
 
-  const appId = options.appid || await input({
+  const appId = await input({
     message: t.init.prompts.appId,
-    default: 'com.example.myapp',
+    default: options.appid||`com.${projectPackage.name}.mobile`||'com.example.myapp',
+    prefill: options.appid?'editable':'tab'
   });
 
-  const engine = options.type || await select({
-    message: t.init.prompts.engine,
+  const configType = await select({
+    message: t.init.prompts.configType,
     choices: [
-      { name: '@jadejr/capacitor-nodejs', value: 'capacitor-nodejs' },
-      { name: 'nodejs-mobile-capacitor', value: 'nodejs-mobile' },
+      { name: 'json', value: 'json' },
+      { name: 'typescript', value: 'ts' },
     ],
-    default: 'capacitor-nodejs',
+    // @ts-ignore
+    default: options.type||'json',
   });
 
   const config: E2CConfig = {
     electronProjectPath: projectPath,
     outputPath,
     projectName,
-    appId,
-    settings: {
-      verbose: options.verbose || false,
-    },
+    appId
   };
 
-  const configPath = path.join(process.cwd(), 'e2c.config.json');
-  await ensureDirectory(path.dirname(configPath));
-  await writeConfig(configPath, config);
+  const configPath = path.join(process.cwd(), `e2c.config.${configType}`);
+  await writeProjectConfig(configType, configPath, config);
 
   logger.success(t.init.success);
   logger.info(`${t.init.configCreated}: ${configPath}`);

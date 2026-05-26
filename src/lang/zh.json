@@ -11,7 +11,6 @@
         "projectName": "应用名",
         "appId": "应用ID",
         "configType": "配置文件类型",
-        "engine": "Node.js引擎",
         "default": "使用默认配置"
       }
     },
@@ -89,7 +88,7 @@
       "outputPath": "输入输出目录路径",
       "projectName": "输入项目名称",
       "appId": "输入应用 ID",
-      "engine": "选择 Node.js 引擎"
+      "configType": "请选择配置文件类型"
     },
     "success": "项目初始化成功！",
     "configCreated": "配置文件创建于"
@@ -154,7 +153,8 @@
     "copyFailed": "文件复制失败",
     "pluginLoadFailed": "插件加载失败",
     "invalidKey": "无效的配置键",
-    "unknownCommand": "未知命令，请使用 --help 查看可用命令"
+    "unknownCommand": "未知命令，请使用 --help 查看可用命令",
+    "invalidType": "无效的类型，请输入json或ts"
   },
   "common": {
     "error": "错误",

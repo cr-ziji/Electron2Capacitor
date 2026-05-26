@@ -149,7 +149,6 @@ export interface LanguagePack {
         projectName: string;
         appId: string;
         configType: string;
-        engine: string;
         default: string;
       };
     };
@@ -227,7 +226,7 @@ export interface LanguagePack {
       outputPath: string;
       projectName: string;
       appId: string;
-      engine: string;
+      configType: string;
     };
     success: string;
     configCreated: string;
@@ -293,6 +292,7 @@ export interface LanguagePack {
     pluginLoadFailed: string;
     invalidKey: string;
     unknownCommand: string;
+    invalidType: string;
   };
   common: {
     error: string;

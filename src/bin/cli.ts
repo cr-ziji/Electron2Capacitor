@@ -25,8 +25,17 @@ program
     .option('-d, --default', lang.cli.init.options.default)
     .action(async (options) => {
         try {
+            if (options.type !== 'json' && options.type !== 'ts' && options.type !== 'typescript') {
+                logger.error(`${lang.cli.init.error}: ${lang.errors.invalidType}`);
+                process.exit(1);
+            }
+            if (options.type === 'typescript') options.type = 'ts';
             await initializeProject(options)
         } catch (error) {
+            // @ts-ignore
+            if (error.name === 'ExitPromptError') {
+                process.exit(0);
+            }
             logger.error(`${lang.cli.init.error}:`, error);
             process.exit(1);
         }

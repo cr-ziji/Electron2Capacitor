@@ -11,7 +11,6 @@
         "projectName": "Application name",
         "appId": "Application ID",
         "configType": "Configuration file type",
-        "engine": "Node.js engine",
         "default": "Use default configuration"
       }
     },
@@ -89,7 +88,7 @@
       "outputPath": "Enter the output directory path",
       "projectName": "Enter the project name",
       "appId": "Enter the application ID",
-      "engine": "Select the Node.js engine"
+      "configType": "Please select the configuration file type"
     },
     "success": "Project initialized successfully!",
     "configCreated": "Configuration file created at"
@@ -154,7 +153,8 @@
     "copyFailed": "File copy failed",
     "pluginLoadFailed": "Failed to load plugin",
     "invalidKey": "Invalid configuration key",
-    "unknownCommand": "Unknown command, please use -- help to view available commands"
+    "unknownCommand": "Unknown command, please use -- help to view available commands",
+    "invalidType": "Invalid type, please enter json or ts"
   },
   "common": {
     "error": "Error",

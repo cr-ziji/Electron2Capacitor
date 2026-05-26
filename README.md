@@ -333,7 +333,6 @@ e2c/
 #### 4.2.2 e2c.config.ts (项目配置)
 
 ```typescript
-// vite.config.ts
 import { defineConfig, defaultPlugins } from '@e2c/e2c-cli'
 
 export default defineConfig({
