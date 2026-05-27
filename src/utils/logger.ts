@@ -22,7 +22,8 @@ export function createLogger(options?: LoggerOptions): Logger {
       console.log(chalk.yellow('[WARN]'), msg);
     },
     error: (msg: string, err?: any) => {
-      console.error(chalk.red('[ERROR]'), msg, err);
+      if (err) console.error(chalk.red('[ERROR]'), msg, err);
+      else console.error(chalk.red('[ERROR]'), msg);
     },
     success: (msg: string) => {
       console.log(chalk.green('[SUCCESS]'), msg);

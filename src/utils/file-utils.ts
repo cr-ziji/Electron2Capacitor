@@ -12,13 +12,6 @@ export async function writeJSON(filePath: string, data: any): Promise<void> {
   await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
 }
 
-export async function writeTS(filePath: string, data: any): Promise<void> {
-  await fs.ensureDir(path.dirname(filePath));
-  const config = JSON.stringify(data, null, 2);
-
-  await fs.writeFile(filePath, `import { defineConfig } from '@e2c/e2c-cli'\n\nexport default defineConfig(${config})`, 'utf-8');
-}
-
 export async function copyDirectory(src: string, dest: string): Promise<void> {
   await fs.copy(src, dest, { overwrite: true });
 }
@@ -38,9 +31,10 @@ export async function writeConfig(filePath: string, data: any): Promise<void> {
   await writeJSON(filePath, data);
 }
 
-export async function writeProjectConfig(configType: string, filePath: string, data: any): Promise<void> {
-  if (configType === 'json') await writeJSON(filePath, data);
-  else if (configType === 'ts') await writeTS(filePath, data);
+export async function writeProjectConfig(filePath: string, data: any): Promise<void> {
+  await fs.ensureDir(path.dirname(filePath));
+  const config = JSON.stringify(data, null, 2);
+  await fs.writeFile(filePath, `const { defineConfig } = require('@e2c/e2c-cli')\n\nmodule.exports = defineConfig(${config})`, 'utf-8');
 }
 
 export function getGlobalConfigPath(): string {

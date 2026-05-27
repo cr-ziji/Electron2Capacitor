@@ -316,33 +316,16 @@ e2c/
 
 ### 4.2 配置文件设计
 
-#### 4.2.1 e2c.config.json (项目配置)
-
-```json
-{
-  "electronProjectPath": "./electron-app",
-  "outputPath": "./capacitor-app",
-  "projectName": "my-mobile-app",
-  "appId": "com.example.myapp",
-  "settings": {
-    "verbose": false
-  }
-}
-```
-
-#### 4.2.2 e2c.config.ts (项目配置)
+#### e2c.config.js/ts
 
 ```typescript
-import { defineConfig, defaultPlugins } from '@e2c/e2c-cli'
+const { defineConfig, defaultPlugins } = require('@e2c/e2c-cli')
 
-export default defineConfig({
+module.exports = defineConfig({
     "electronProjectPath": "./electron-app",
     "outputPath": "./capacitor-app",
     "projectName": "my-mobile-app",
     "appId": "com.example.myapp",
-    "settings": {
-        "verbose": boolean
-    },
     "nodejs": {
         "engine": defaultPlugins.capacitorNodejs({ version: "latest" }),
         "packages": {

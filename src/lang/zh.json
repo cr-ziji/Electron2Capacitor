@@ -154,7 +154,7 @@
     "pluginLoadFailed": "插件加载失败",
     "invalidKey": "无效的配置键",
     "unknownCommand": "未知命令，请使用 --help 查看可用命令",
-    "invalidType": "无效的类型，请输入json或ts"
+    "invalidType": "无效的类型，请输入js或ts"
   },
   "common": {
     "error": "错误",

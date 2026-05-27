@@ -154,7 +154,7 @@
     "pluginLoadFailed": "Failed to load plugin",
     "invalidKey": "Invalid configuration key",
     "unknownCommand": "Unknown command, please use -- help to view available commands",
-    "invalidType": "Invalid type, please enter json or ts"
+    "invalidType": "Invalid type, please enter js or ts"
   },
   "common": {
     "error": "Error",

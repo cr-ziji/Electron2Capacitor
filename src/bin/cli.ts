@@ -21,15 +21,16 @@ program
     .option('-o, --out <path>', lang.cli.init.options.outputPath)
     .option('-n, --name <name>', lang.cli.init.options.projectName)
     .option('-a, --appid <id>', lang.cli.init.options.appId)
-    .option('-t, --type <type>', `${lang.cli.init.options.configType}`, 'json')
+    .option('-t, --type <type>', `${lang.cli.init.options.configType}`, 'ts')
     .option('-d, --default', lang.cli.init.options.default)
     .action(async (options) => {
         try {
-            if (options.type !== 'json' && options.type !== 'ts' && options.type !== 'typescript') {
+            if (options.type !== 'js' && options.type !== 'javascript' && options.type !== 'ts' && options.type !== 'typescript') {
                 logger.error(`${lang.cli.init.error}: ${lang.errors.invalidType}`);
                 process.exit(1);
             }
             if (options.type === 'typescript') options.type = 'ts';
+            if (options.type === 'javascript') options.type = 'js';
             await initializeProject(options)
         } catch (error) {
             // @ts-ignore

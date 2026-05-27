@@ -56,11 +56,11 @@ export async function initializeProject(options: InitOptions): Promise<boolean> 
   const configType = await select({
     message: t.init.prompts.configType,
     choices: [
-      { name: 'json', value: 'json' },
+      { name: 'javascript', value: 'js' },
       { name: 'typescript', value: 'ts' },
     ],
     // @ts-ignore
-    default: options.type||'json',
+    default: options.type||'js',
   });
 
   const config: E2CConfig = {
@@ -71,7 +71,7 @@ export async function initializeProject(options: InitOptions): Promise<boolean> 
   };
 
   const configPath = path.join(process.cwd(), `e2c.config.${configType}`);
-  await writeProjectConfig(configType, configPath, config);
+  await writeProjectConfig(configPath, config);
 
   logger.success(t.init.success);
   logger.info(`${t.init.configCreated}: ${configPath}`);
