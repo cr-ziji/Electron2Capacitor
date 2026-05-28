@@ -14,53 +14,61 @@ export interface InitOptions {
   name?: string;
   appid?: string;
   type?: string;
-  verbose?: boolean;
+  default?: boolean;
 }
 
 export async function initializeProject(options: InitOptions): Promise<boolean> {
-  const logger: Logger = createLogger({ verbose: options.verbose || false });
+  const logger: Logger = createLogger();
 
   logger.info(t.init.title);
   logger.info(t.init.description);
 
-  const projectPath = await input({
+  const defaultProjectPath: string = options.in||'./';
+  const projectPath: string = options.default ? defaultProjectPath : await input({
     message: t.init.prompts.projectPath,
-    default: options.in||'./',
+    default: defaultProjectPath,
     prefill: options.in?'editable':'tab'
   });
-  const projectPathResolved = resolvePath(projectPath);
+  const projectPathResolved: string = resolvePath(projectPath);
   if (!await fs.pathExists(projectPathResolved)) {
     logger.error(t.errors.projectNotFound);
     return false;
   }
-  const projectPackage = require(path.join(projectPathResolved, 'package.json'));
+  let projectPackage = { name: undefined };
+  if (await fs.pathExists(path.join(projectPathResolved, 'package.json'))){
+    projectPackage = require(path.join(projectPathResolved, 'package.json'))
+  }
 
-  const outputPath = await input({
+  const defaultOutputPath: string = options.out||'./output';
+  const outputPath: string = options.default ? defaultOutputPath : await input({
     message: t.init.prompts.outputPath,
-    default: options.out||'./output',
+    default: defaultOutputPath,
     prefill: options.out?'editable':'tab'
   });
 
-  const projectName = await input({
+  const defaultProjectName: string = options.name||projectPackage.name||'myapp';
+  const projectName: string = options.default ? defaultProjectName : await input({
     message: t.init.prompts.projectName,
-    default: options.name||projectPackage.name||'my-mobile-app',
+    default: defaultProjectName,
     prefill: options.name?'editable':'tab'
   });
 
-  const appId = await input({
+  const defaultAppId: string = options.appid||(projectPackage.name&&`com.${projectPackage.name}.mobile`)||'com.myapp.mobile';
+  const appId: string = options.default ? defaultAppId : await input({
     message: t.init.prompts.appId,
-    default: options.appid||`com.${projectPackage.name}.mobile`||'com.example.myapp',
+    default: defaultAppId,
     prefill: options.appid?'editable':'tab'
   });
 
-  const configType = await select({
+  const defaultConfigType: string = options.type||'ts';
+  const configType: string = options.default ? defaultConfigType : await select({
     message: t.init.prompts.configType,
     choices: [
       { name: 'javascript', value: 'js' },
       { name: 'typescript', value: 'ts' },
     ],
     // @ts-ignore
-    default: options.type||'js',
+    default: defaultConfigType,
   });
 
   const config: E2CConfig = {
@@ -70,7 +78,7 @@ export async function initializeProject(options: InitOptions): Promise<boolean> 
     appId
   };
 
-  const configPath = path.join(process.cwd(), `e2c.config.${configType}`);
+  const configPath: string = path.join(process.cwd(), `e2c.config.${configType}`);
   await writeProjectConfig(configPath, config);
 
   logger.success(t.init.success);
