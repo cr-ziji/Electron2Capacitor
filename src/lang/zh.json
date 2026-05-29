@@ -34,49 +34,23 @@
       "description": "配置管理",
       "get": {
         "description": "获取配置值",
-        "error": "获取配置失败",
-        "options": {
-          "global": "只读取全局配置",
-          "project": "只读取项目配置",
-          "json": "以 JSON 格式输出"
-        }
+        "error": "获取配置失败"
       },
       "set": {
         "description": "设置配置值",
-        "error": "设置配置失败",
-        "options": {
-          "global": "设置到全局配置（默认）",
-          "project": "设置到项目配置",
-          "force": "强制覆盖，不提示确认"
-        }
+        "error": "设置配置失败"
       },
       "list": {
         "description": "列出所有配置",
-        "error": "列出配置失败",
-        "options": {
-          "global": "只显示全局配置",
-          "project": "只显示项目配置",
-          "merged": "显示合并后的最终配置（默认）",
-          "table": "以表格形式显示（默认）",
-          "json": "以 JSON 格式显示"
-        }
+        "error": "列出配置失败"
       },
       "reset": {
         "description": "重置配置为默认值",
-        "error": "重置配置失败",
-        "options": {
-          "global": "重置全局配置（默认）",
-          "project": "重置项目配置",
-          "yes": "跳过确认提示"
-        }
+        "error": "重置配置失败"
       },
       "delete": {
         "description": "删除配置项",
-        "error": "删除配置失败",
-        "options": {
-          "global": "从全局配置删除（默认）",
-          "project": "从项目配置删除"
-        }
+        "error": "删除配置失败"
       }
     }
   },

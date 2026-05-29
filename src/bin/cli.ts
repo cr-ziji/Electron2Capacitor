@@ -7,12 +7,13 @@ const packageJson = require('../../../package.json');
 import { initializeProject } from '../core/init-engine';
 import { checkProject } from '../core/check-engine';
 import { convertProject } from '../core/convert-engine';
-import { getConfig, setConfig, listConfig, resetConfig, deleteConfig } from '../core/config-engine';
+import { getConfig, setConfig, listConfig, resetConfig, deleteConfig, getConfigSync } from '../core/config-engine';
 import { createLogger, Logger } from '../utils/logger';
 import { loadLanguagePack, LanguagePack } from '../utils/lang-loader';
 
 const logger: Logger = createLogger();
-const lang: LanguagePack = loadLanguagePack('zh');
+// @ts-ignore
+const lang: LanguagePack = loadLanguagePack(getConfigSync('lang') || 'zh');
 
 program
     .command('init')
@@ -77,12 +78,9 @@ const configCmd = program
 configCmd
     .command('get [key]')
     .description(lang.cli.config.get.description)
-    .option('-g, --global', lang.cli.config.get.options.global)
-    .option('-p, --project', lang.cli.config.get.options.project)
-    .option('-j, --json', lang.cli.config.get.options.json)
-    .action(async (key, options) => {
+    .action(async (key) => {
         try {
-            await getConfig(key, options);
+            logger.info(await getConfig(key));
         } catch (error) {
             logger.error(`${lang.cli.config.get.error}:`, error);
             process.exit(1);
@@ -92,12 +90,9 @@ configCmd
 configCmd
     .command('set <key> <value>')
     .description(lang.cli.config.set.description)
-    .option('-g, --global', lang.cli.config.set.options.global, true)
-    .option('-p, --project', lang.cli.config.set.options.project)
-    .option('-f, --force', lang.cli.config.set.options.force)
-    .action(async (key, value, options) => {
+    .action(async (key, value) => {
         try {
-            await setConfig(key, value, options);
+            await setConfig(key, value);
         } catch (error) {
             logger.error(`${lang.cli.config.set.error}:`, error);
             process.exit(1);
@@ -107,14 +102,9 @@ configCmd
 configCmd
     .command('list')
     .description(lang.cli.config.list.description)
-    .option('-g, --global', lang.cli.config.list.options.global)
-    .option('-p, --project', lang.cli.config.list.options.project)
-    .option('-m, --merged', lang.cli.config.list.options.merged, true)
-    .option('-t, --table', lang.cli.config.list.options.table, true)
-    .option('-j, --json', lang.cli.config.list.options.json)
-    .action(async (options) => {
+    .action(async () => {
         try {
-            await listConfig(options)
+            logger.info(await listConfig());
         } catch (error) {
             logger.error(`${lang.cli.config.list.error}:`, error);
             process.exit(1);
@@ -124,12 +114,9 @@ configCmd
 configCmd
     .command('reset [key]')
     .description(lang.cli.config.reset.description)
-    .option('-g, --global', lang.cli.config.reset.options.global, true)
-    .option('-p, --project', lang.cli.config.reset.options.project)
-    .option('-y, --yes', lang.cli.config.reset.options.yes)
-    .action(async (key, options) => {
+    .action(async (key) => {
         try {
-            await resetConfig(key, options);
+            await resetConfig(key);
         } catch (error) {
             logger.error(`${lang.cli.config.reset.error}:`, error);
             process.exit(1);
@@ -139,11 +126,9 @@ configCmd
 configCmd
     .command('delete <key>')
     .description(lang.cli.config.delete.description)
-    .option('-g, --global', lang.cli.config.delete.options.global, true)
-    .option('-p, --project', lang.cli.config.delete.options.project)
-    .action(async (key, options) => {
+    .action(async (key) => {
         try {
-            await deleteConfig(key, options);
+            await deleteConfig(key);
         } catch (error) {
             logger.error(`${lang.cli.config.delete.error}:`, error);
             process.exit(1);

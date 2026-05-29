@@ -135,20 +135,10 @@ e2c convert [options]
 
 #### 3.1.4 `e2c config`
 
-配置管理
+全局配置管理
 
 ```bash
 e2c config [command] [options]
-```
-
-**层级:**
-
-```
-全局配置 (~/.e2c/config.json)
-↓ (继承)
-项目配置 (./e2c.config.json)
-↓ (覆盖)
-命令行参数 (--flag)
 ```
 
 **全局配置文件路径:**
@@ -173,12 +163,6 @@ e2c config get [key] [options]
 
 - `key` - 配置键名
 
-**选项:**
-
-- `-g, --global` - 只读取全局配置
-- `-p, --project` - 只读取项目配置
-- `-j, --json` - 以 JSON 格式输出
-
 ###### 2. `e2c config set`
 
 设置配置值
@@ -192,12 +176,6 @@ e2c config set <key> <value> [options]
 - `key` - 配置键名（支持点号分隔）
 - `value` - 配置值（字符串、数字、JSON 对象）
 
-**选项:**
-
-- `-g, --global` - 设置到全局配置（默认）
-- `-p, --project` - 设置到项目配置
-- `-f, --force` - 强制覆盖，不提示确认
-
 ###### 3. `e2c config list`
 
 列出所有配置
@@ -205,14 +183,6 @@ e2c config set <key> <value> [options]
 ```bash
 e2c config list [options]
 ```
-
-**选项:**
-
-- `-g, --global` - 只显示全局配置
-- `-p, --project` - 只显示项目配置
-- `-m, --merged` - 显示合并后的最终配置（默认）
-- `-t, --table` - 以表格形式显示（默认）
-- `-j, --json` - 以 JSON 格式显示
 
 ###### 4. `e2c config reset`
 
@@ -226,12 +196,6 @@ e2c config reset [key] [options]
 
 - `key` - 要重置的配置键（可选，不指定则重置所有）
 
-**选项:**
-
-- `-g, --global` - 重置全局配置（默认）
-- `-p, --project` - 重置项目配置
-- `-y, --yes` - 跳过确认提示
-
 ###### 5. `e2c config delete`
 
 删除配置项
@@ -243,11 +207,6 @@ e2c config delete <key> [options]
 参数：
 
 - `key` - 要删除的配置键
-
-**选项:**
-
-- `-g, --global` - 从全局配置删除（默认）
-- `-p, --project` - 从项目配置删除
 
 ### 3.2 退出码
 

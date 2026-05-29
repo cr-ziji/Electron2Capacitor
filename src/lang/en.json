@@ -34,49 +34,23 @@
       "description": "Configuration management",
       "get": {
         "description": "Get configuration value",
-        "error": "Failed to get configuration",
-        "options": {
-          "global": "Read global configuration only",
-          "project": "Read project configuration only",
-          "json": "Output as JSON format"
-        }
+        "error": "Failed to get configuration"
       },
       "set": {
         "description": "Set configuration value",
-        "error": "Failed to set configuration",
-        "options": {
-          "global": "Set to global configuration (default)",
-          "project": "Set to project configuration",
-          "force": "Force overwrite without confirmation"
-        }
+        "error": "Failed to set configuration"
       },
       "list": {
         "description": "List all configurations",
-        "error": "Failed to list configurations",
-        "options": {
-          "global": "Show global configuration only",
-          "project": "Show project configuration only",
-          "merged": "Show merged final configuration (default)",
-          "table": "Display as table (default)",
-          "json": "Display as JSON format"
-        }
+        "error": "Failed to list configurations"
       },
       "reset": {
         "description": "Reset configuration to default",
-        "error": "Failed to reset configuration",
-        "options": {
-          "global": "Reset global configuration (default)",
-          "project": "Reset project configuration",
-          "yes": "Skip confirmation prompt"
-        }
+        "error": "Failed to reset configuration"
       },
       "delete": {
         "description": "Delete configuration item",
-        "error": "Failed to delete configuration",
-        "options": {
-          "global": "Delete from global configuration (default)",
-          "project": "Delete from project configuration"
-        }
+        "error": "Failed to delete configuration"
       }
     }
   },

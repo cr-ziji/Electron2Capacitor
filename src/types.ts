@@ -173,48 +173,22 @@ export interface LanguagePack {
       get: {
         description: string;
         error: string;
-        options: {
-          global: string;
-          project: string;
-          json: string;
-        };
       };
       set: {
         description: string;
         error: string;
-        options: {
-          global: string;
-          project: string;
-          force: string;
-        };
       };
       list: {
         description: string;
         error: string;
-        options: {
-          global: string;
-          project: string;
-          merged: string;
-          table: string;
-          json: string;
-        };
       };
       reset: {
         description: string;
         error: string;
-        options: {
-          global: string;
-          project: string;
-          yes: string;
-        };
       };
       delete: {
         description: string;
         error: string;
-        options: {
-          global: string;
-          project: string;
-        };
       };
     };
   };

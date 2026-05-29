@@ -3,7 +3,12 @@ import path from 'path';
 import os from 'os';
 
 export async function readJSON<T = any>(filePath: string): Promise<T> {
-  const content = await fs.readFile.__promisify__(filePath, 'utf-8');
+  const content = await fs.readFile(filePath, 'utf-8');
+  return JSON.parse(content);
+}
+
+export function readJSONSync<T = any>(filePath: string): Promise<T> {
+  const content = fs.readFileSync(filePath, 'utf-8');
   return JSON.parse(content);
 }
 

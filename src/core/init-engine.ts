@@ -5,8 +5,10 @@ import { input, select } from '@inquirer/prompts';
 import { writeProjectConfig, resolvePath } from '../utils/file-utils';
 import { createLogger, Logger } from '../utils/logger';
 import { loadLanguagePack, LanguagePack } from '../utils/lang-loader';
+import { getConfigSync } from "./config-engine";
 
-const t: LanguagePack = loadLanguagePack('zh');
+// @ts-ignore
+const t: LanguagePack = loadLanguagePack(getConfigSync('lang') || 'zh');
 
 export interface InitOptions {
   in?: string;
