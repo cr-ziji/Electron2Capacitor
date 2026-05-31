@@ -228,6 +228,25 @@ export interface LanguagePack {
   };
   config: {
     title: string;
+    readingPath: string;
+    keyFound: string;
+    keyNotFound: string;
+    returnFull: string;
+    fileNotExist: string;
+    unsupportedLang: string;
+    settingKey: string;
+    listing: string;
+    foundItems: string;
+    resettingKey: string;
+    keyReset: string;
+    keyNotFoundReset: string;
+    resettingAll: string;
+    fileRemoved: string;
+    fileNotExistReset: string;
+    deletingKey: string;
+    keyDeleted: string;
+    keyNotFoundDelete: string;
+    fileNotExistDelete: string;
     get: {
       description: string;
       notFound: string;
