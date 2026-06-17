@@ -56,15 +56,24 @@ export function resolvePath(inputPath: string): string {
   return path.join(process.cwd(), inputPath);
 }
 
+export function requireTs(filePath: string): any {
+  require('tsx');
+  return require(filePath);
+}
+
 export async function getProjectConfig(configPath?: string): Promise<E2CConfig> {
   if (configPath && !await fs.pathExists(configPath)) {
     throw new Error('Config file not found');
   }
   if (configPath){
-    return require(configPath);
+    if (configPath.endsWith('.ts')) return requireTs(configPath);
+    else return require(configPath);
   }
   if (await fs.pathExists(path.join(process.cwd(), 'e2c.config.js'))){
     return require(path.join(process.cwd(), 'e2c.config.js'));
+  }
+  if (await fs.pathExists(path.join(process.cwd(), 'e2c.config.ts'))){
+    return requireTs(path.join(process.cwd(), 'e2c.config.ts'));
   }
   throw new Error('Config file not found');
 }
