@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import os from 'os';
+import { E2CConfig } from "../types";
 
 export async function readJSON<T = any>(filePath: string): Promise<T> {
   const content = await fs.readFile(filePath, 'utf-8');
@@ -53,4 +54,33 @@ export function resolvePath(inputPath: string): string {
     return inputPath;
   }
   return path.join(process.cwd(), inputPath);
+}
+
+export async function getProjectConfig(configPath?: string): Promise<E2CConfig> {
+  if (configPath && !await fs.pathExists(configPath)) {
+    throw new Error('Config file not found');
+  }
+  if (configPath){
+    return require(configPath);
+  }
+  if (await fs.pathExists(path.join(process.cwd(), 'e2c.config.js'))){
+    return require(path.join(process.cwd(), 'e2c.config.js'));
+  }
+  throw new Error('Config file not found');
+}
+
+export async function copyFolder(src: string, dest: string, filter: (src: string, dest: string) => boolean|Promise<boolean>) {
+  await fs.ensureDir(dest);
+  const items = await fs.readdir(src);
+  for (const item of items) {
+    const srcPath = path.join(src, item);
+    const destPath = path.join(dest, item);
+    if (!await filter(srcPath, destPath)) continue;
+    const stat = await fs.stat(srcPath);
+    if (stat.isDirectory()) {
+      await copyFolder(srcPath, destPath, filter);
+    } else {
+      await fs.copy(srcPath, destPath);
+    }
+  }
 }

@@ -1,29 +1,34 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { E2CConfig, LanguagePack, StageResult, ExitCode } from '../types';
+import { confirm } from '@inquirer/prompts';
+import { LanguagePack, StageResult, ExitCode, E2CConfig } from '../types';
 import { createLogger, Logger } from '../utils/logger';
-import { readConfig, ensureDirectory } from '../utils/file-utils';
+import { ensureDirectory, getProjectConfig } from '../utils/file-utils';
 import { loadPlugins } from './plugin/loader';
+import { loadLanguagePack } from "../utils/lang-loader";
+import { getConfigSync } from "./config-engine";
 import { copyFiles } from './stages/file-copy';
-import { transformCode } from './stages/code-transform';
-import { adaptConfig } from './stages/config-adapter';
+// import { transformCode } from './stages/code-transform';
+// import { adaptConfig } from './stages/config-adapter';
 
 export interface ConvertOptions {
   config?: string;
   force?: boolean;
   verbose?: boolean;
-  lang: LanguagePack;
 }
 
+// @ts-ignore
+const t: LanguagePack = loadLanguagePack(getConfigSync('lang') || 'zh');
+
 export async function convertProject(options: ConvertOptions): Promise<boolean> {
-  const logger = createLogger({ verbose: options.verbose || false });
-  const t = options.lang;
+  const logger: Logger = createLogger({ verbose: options.verbose || false });
 
-  const configPath = options.config || path.join(process.cwd(), 'e2c.config.json');
-  const config = await readConfig<E2CConfig>(configPath);
-
-  if (!config) {
-    logger.error(t.errors.configNotFound);
+  let config: E2CConfig;
+  try {
+    config = await getProjectConfig(options.config);
+  }
+  catch (err){
+    logger.error(t.errors.configNotFound, err);
     process.exit(ExitCode.configError);
   }
 
@@ -35,12 +40,16 @@ export async function convertProject(options: ConvertOptions): Promise<boolean> 
     process.exit(ExitCode.configError);
   }
 
-  if (await fs.pathExists(outputPath)) {
+  if (await fs.pathExists(outputPath) && (await fs.readdir(outputPath)).length > 0) {
     if (!options.force) {
-      logger.error(`Output directory exists. Use -f to force overwrite.`);
-      process.exit(ExitCode.error);
+      options.force = await confirm({ message: t.convert.exits });
     }
-    await fs.remove(outputPath);
+    if (options.force) {
+      await fs.remove(outputPath);
+    }
+    else {
+      return false;
+    }
   }
 
   await ensureDirectory(outputPath);
@@ -53,7 +62,7 @@ export async function convertProject(options: ConvertOptions): Promise<boolean> 
 
   const stage1Start = Date.now();
   try {
-    await copyFiles(projectPath, outputPath, plugins, logger);
+    await copyFiles(options, projectPath, outputPath, config);
     results.push({ name: 'File Copy', status: 'success', duration: Date.now() - stage1Start });
     logger.stage('File Copy', 'success');
   } catch (err: any) {
@@ -65,7 +74,7 @@ export async function convertProject(options: ConvertOptions): Promise<boolean> 
 
   const stage2Start = Date.now();
   try {
-    await transformCode(outputPath, plugins, logger);
+    // await transformCode(outputPath, plugins, logger);
     results.push({ name: 'Code Transform', status: 'success', duration: Date.now() - stage2Start });
     logger.stage('Code Transform', 'success');
   } catch (err: any) {
@@ -77,7 +86,7 @@ export async function convertProject(options: ConvertOptions): Promise<boolean> 
 
   const stage3Start = Date.now();
   try {
-    await adaptConfig(outputPath, config, plugins, logger);
+    // await adaptConfig(outputPath, config, plugins, logger);
     results.push({ name: 'Config Adapter', status: 'success', duration: Date.now() - stage3Start });
     logger.stage('Config Adapter', 'success');
   } catch (err: any) {

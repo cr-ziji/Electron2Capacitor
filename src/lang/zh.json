@@ -82,8 +82,13 @@
   "convert": {
     "title": "E2C 项目转换",
     "description": "正在将 Electron 项目转换为 Capacitor。",
+    "exits": "输出目录已存在，是否强制覆盖？",
     "converting": "开始转换过程...",
-    "stage": "执行阶段",
+    "stage": {
+      "copy": "正在复制文件...",
+      "transform": "正在转换代码...",
+      "plugins": "正在安装插件..."
+    },
     "complete": "转换完成！",
     "outputDir": "输出目录",
     "filesProcessed": "已处理文件"

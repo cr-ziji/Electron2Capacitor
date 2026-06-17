@@ -1,5 +1,5 @@
 {
-  "name": "electron2capacitor",
+  "name": "@e2c/cli",
   "version": "1.0.0",
   "description": "e2c (Electron to Capacitor) 是一个用于快速将 Electron 项目转换为 Capacitor 移动端项目的命令行工具。",
   "repository": {

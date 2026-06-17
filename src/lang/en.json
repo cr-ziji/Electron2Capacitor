@@ -82,8 +82,13 @@
   "convert": {
     "title": "E2C Project Conversion",
     "description": "Converting Electron project to Capacitor.",
+    "exits": "Output directory already exists, do you want to force overwrite?",
     "converting": "Starting conversion process...",
-    "stage": "Executing stage",
+    "stage": {
+      "copy": "Copying files...",
+      "transform": "Transforming code...",
+      "plugins": "Installing plugins..."
+    },
     "complete": "Conversion completed successfully!",
     "outputDir": "Output directory",
     "filesProcessed": "Files processed"

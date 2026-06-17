@@ -117,7 +117,7 @@ e2c check [options]
 
 **选项:**
 
-- `-c, --config <path>` - 读取配置（默认：`/e2c.config.json`或`/e2c.config.ts`）
+- `-c, --config <path>` - 读取配置（默认：`/e2c.config.js`或`/e2c.config.ts`）
 
 #### 3.1.3 `e2c convert`
 
@@ -129,7 +129,7 @@ e2c convert [options]
 
 **选项:**
 
-- `-c, --config <path>` - 转换配置（默认：`/e2c.config.json`或`/e2c.config.ts`）
+- `-c, --config <path>` - 转换配置（默认：`/e2c.config.js`或`/e2c.config.ts`）
 - `-f, --force` - 覆盖输出目录
 - `-v, --verbose` - 详细输出模式
 

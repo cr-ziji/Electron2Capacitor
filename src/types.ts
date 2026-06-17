@@ -220,8 +220,13 @@ export interface LanguagePack {
   convert: {
     title: string;
     description: string;
+    exits: string;
     converting: string;
-    stage: string;
+    stage: {
+      copy: string;
+      transform: string;
+      plugins: string;
+    };
     complete: string;
     outputDir: string;
     filesProcessed: string;
