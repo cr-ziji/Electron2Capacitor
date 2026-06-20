@@ -33,4 +33,23 @@ export async function copyFiles(options: ConvertOptions, projectPath: string, ou
         webDir: 'dist'
     }
     await writeJSON(path.join(outputPath, 'capacitor.config.json'), capConfig);
+    const packageJSON = {
+        name: config.projectName||'myapp',
+        version: '0.0.1',
+        scripts: {
+            dev: "vite",
+            build: "vite build",
+            preview: "vite preview"
+        },
+        dependencies: {
+            "@capacitor/android": "^8.3.4",
+            "@capacitor/ios": "^8.3.4",
+            "@capacitor/cli": "^8.3.4",
+            "@capacitor/core": "^8.3.4"
+        },
+        devDependencies: {
+            "vite": "^8.0.12"
+        }
+    }
+    await writeJSON(path.join(outputPath, 'package.json'), packageJSON);
 }
